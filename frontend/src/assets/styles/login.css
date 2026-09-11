@@ -1,0 +1,340 @@
+/*
+ *   Copyright (c) 2025 
+ *   All rights reserved.
+ */
+/* --- 全局字体与背景 --- */
+.login-body {
+    min-height: 100vh;
+    /* 还原图片那种微微泛黄的纸质/米白色背景 */
+    background-color: #ffffff;
+    background-image: linear-gradient(to bottom, #fcfcf9, #f5f5f0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    color: #333;
+}
+
+/* --- 登录容器 --- */
+.login-container {
+    width: 400px;
+    /* 窄屏卡片设计，符合图片比例 */
+    max-width: 92%;
+    margin: 0 auto;
+}
+
+/* --- 卡片主体 --- */
+.login-card {
+    background: transparent;
+    /* 图片看起来像是在页面上直接排版，或者卡片背景也是纯白融为一体 */
+    /* 这里设为纯白并加极淡的阴影，使其有层次感但不过分突兀 */
+    background: #fff;
+    padding: 20px 30px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+/* --- Logo 区域 --- */
+.logo-header {
+    position: relative;
+    /* 父容器设为相对定位，作为子元素定位参考 */
+    text-align: center;
+    margin-bottom: 20px;
+    height: 120px;
+    /* 固定高度，保证图片/文字都在该区域内 */
+    display: flex;
+    /* 辅助文字垂直居中 */
+    align-items: center;
+    justify-content: center;
+}
+
+/* 图片层（背景，下一层） */
+.logo-bg {
+    position: absolute;
+    /* 绝对定位，脱离文档流 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* 占满父容器宽度 */
+    height: 100%;
+    /* 占满父容器高度 */
+    z-index: 0;
+    /* 层级设为1（下层） */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-bg img {
+    max-width: 400px;
+    /* 控制图片最大宽度 */
+    height: auto;
+    /* 等比缩放 */
+    opacity: 0.6;
+    /* 可选：降低图片透明度，让文字更清晰 */
+}
+
+/* --- Tab 切换 (核心还原点) --- */
+.login-tabs {
+    display: flex;
+    justify-content: space-around;
+    /* 两个选项分居两侧 */
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    /* 贯穿的灰色底线 */
+    margin-bottom: 24px;
+    padding: 0 20px;
+    /* 让Tab文字不要贴边，向内挤压一点 */
+}
+
+.tab-item {
+    font-size: 18px;
+    padding: 12px 10px;
+    cursor: pointer;
+    color: #999;
+    /* 未选中为淡灰色 */
+    position: relative;
+    margin-bottom: -1px;
+    /* 让选中下划线盖住底线 */
+    transition: all 0.3s;
+    letter-spacing: 2px;
+}
+
+.tab-item.active {
+    color: #333;
+    /* 选中为深色 */
+    font-weight: 500;
+}
+
+/* 选中的下划线 - 图片中的蓝灰色 */
+.tab-item.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    /* 略粗的下划线 */
+    background-color: #8598a9;
+    /* 提取自图片的灰蓝色 */
+}
+
+/* --- 表单部分 --- */
+.form-content {
+    padding: 0 5px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* 标签文字 */
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: #4a4a4a;
+    margin-bottom: 8px;
+}
+
+/* 输入框外层容器 */
+.input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    /* 浅灰色边框 */
+    border-radius: 6px;
+    background: #fff;
+    overflow: hidden;
+    transition: border-color 0.2s;
+}
+
+/* 聚焦时变色 */
+.input-group:focus-within {
+    border-color: #8598a9;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    height: 42px;
+    border: none;
+    outline: none;
+    padding: 0 12px;
+    font-size: 14px;
+    color: #333;
+    background: transparent;
+}
+
+.input-group input::placeholder {
+    color: #bbb;
+}
+
+/* 验证码按钮样式 */
+.input-group.with-btn {
+    /* 保持 flex 布局，不设 padding 以免影响按钮贴边 */
+    padding: 0;
+}
+
+.verify-btn {
+    background-color: #e6e6e6;
+    /* 图片中的浅灰色背景 */
+    color: #666;
+    border: none;
+    border-left: 1px solid #ddd;
+    height: 42px;
+    padding: 0 15px;
+    font-size: 13px;
+    cursor: pointer;
+    outline: none;
+    white-space: nowrap;
+}
+
+.verify-btn:hover {
+    background-color: #dcdcdc;
+}
+
+/* 角色选择下拉框 */
+.role-select {
+    appearance: none;
+    /* 移除默认箭头背景 */
+    cursor: pointer;
+}
+
+/* --- 辅助选项 (忘记密码/记住我) --- */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #666;
+    margin-top: -5px;
+    margin-bottom: 25px;
+}
+
+/* 链接颜色 */
+.forgot-link {
+    color: #8598a9;
+    text-decoration: none;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+/* Checkbox 样式微调 */
+.remember-me {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.remember-me input {
+    margin-right: 6px;
+    accent-color: #8598a9;
+}
+
+/* --- 主提交按钮 --- */
+.submit-btn {
+    width: 100%;
+    height: 46px;
+    background-color: #8598a9;
+    /* 图片同款灰蓝色 */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #748696;
+}
+
+/* --- 底部区域 --- */
+.footer-area {
+    margin-top: 35px;
+    text-align: center;
+}
+
+/* 分割线 */
+.divider {
+    position: relative;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: #999;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 1px;
+    background: #eee;
+}
+
+.divider::before {
+    left: 10px;
+}
+
+.divider::after {
+    right: 10px;
+}
+
+/* 社交图标圆球 */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.social-btn:hover {
+    transform: scale(1.1);
+}
+
+/* 微信绿 */
+.social-btn.wechat {
+    background-color: #07c160;
+}
+
+/* QQ蓝 */
+.social-btn.qq {
+    background-color: #00b0fb;
+}
+
+/* 微博红 */
+.social-btn.weibo {
+    background-color: #e6162d;
+}
+
+/* 移动端适配 */
+@media (max-width: 480px) {
+    .login-container {
+        width: 100%;
+    }
+
+    .login-card {
+        box-shadow: none;
+        padding: 20px;
+    }
+
+    .logo-text img {
+        max-width: 150px;
+    }
+}

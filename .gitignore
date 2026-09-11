@@ -1,0 +1,25 @@
+# Java / Maven 构建产物
+target/
+*.class
+*.jar
+*.war
+
+# 前端依赖与构建产物
+node_modules/
+dist/
+.vite/
+npm-debug.log*
+yarn-error.log*
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# 本地配置文件（可能包含数据库密码，请勿提交）
+**/application-local.yml
+**/application-local.properties
+
+# 系统文件
+.DS_Store
+Thumbs.db
